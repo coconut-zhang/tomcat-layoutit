@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ariix.twInvoice.TravelDiscountCreditMapper">
+  <resultMap id="BaseResultMap" type="com.ariix.twInvoice.TravelDiscountCredit">
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="CUST_ID" jdbcType="DECIMAL" property="custId" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="TRX_TYPE" jdbcType="CHAR" property="trxType" />
+    <result column="TRX_SOURCE" jdbcType="CHAR" property="trxSource" />
+    <result column="TRX_CURR" jdbcType="CHAR" property="trxCurr" />
+    <result column="TRX_AMOUNT" jdbcType="DECIMAL" property="trxAmount" />
+    <result column="EXCH_RATE" jdbcType="DECIMAL" property="exchRate" />
+    <result column="DEF_CURR" jdbcType="CHAR" property="defCurr" />
+    <result column="DEF_AMOUNT" jdbcType="DECIMAL" property="defAmount" />
+    <result column="USD_AMOUNT" jdbcType="DECIMAL" property="usdAmount" />
+    <result column="REF_NUMBER" jdbcType="DECIMAL" property="refNumber" />
+    <result column="LAST_MODIFIED_DATE" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    <result column="LAST_MODIFIED_BY" jdbcType="VARCHAR" property="lastModifiedBy" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="comments" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CUST_ID, CREATE_DATE, TRX_TYPE, TRX_SOURCE, TRX_CURR, TRX_AMOUNT, EXCH_RATE, 
+    DEF_CURR, DEF_AMOUNT, USD_AMOUNT, REF_NUMBER, LAST_MODIFIED_DATE, LAST_MODIFIED_BY, 
+    COMMENTS, STATUS
+  </sql>
+  <select id="selectByExample" parameterType="com.ariix.twInvoice.TravelDiscountCreditExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TRAVEL_DISCOUNT_CREDIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insert" parameterType="com.ariix.twInvoice.TravelDiscountCredit">
+    insert into TRAVEL_DISCOUNT_CREDIT (ID, CUST_ID, CREATE_DATE, 
+      TRX_TYPE, TRX_SOURCE, TRX_CURR, 
+      TRX_AMOUNT, EXCH_RATE, DEF_CURR, 
+      DEF_AMOUNT, USD_AMOUNT, REF_NUMBER, 
+      LAST_MODIFIED_DATE, LAST_MODIFIED_BY, COMMENTS, 
+      STATUS)
+    values (#{id,jdbcType=DECIMAL}, #{custId,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{trxType,jdbcType=CHAR}, #{trxSource,jdbcType=CHAR}, #{trxCurr,jdbcType=CHAR}, 
+      #{trxAmount,jdbcType=DECIMAL}, #{exchRate,jdbcType=DECIMAL}, #{defCurr,jdbcType=CHAR}, 
+      #{defAmount,jdbcType=DECIMAL}, #{usdAmount,jdbcType=DECIMAL}, #{refNumber,jdbcType=DECIMAL}, 
+      #{lastModifiedDate,jdbcType=TIMESTAMP}, #{lastModifiedBy,jdbcType=VARCHAR}, #{comments,jdbcType=VARCHAR}, 
+      #{status,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ariix.twInvoice.TravelDiscountCredit">
+    insert into TRAVEL_DISCOUNT_CREDIT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="custId != null">
+        CUST_ID,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="trxType != null">
+        TRX_TYPE,
+      </if>
+      <if test="trxSource != null">
+        TRX_SOURCE,
+      </if>
+      <if test="trxCurr != null">
+        TRX_CURR,
+      </if>
+      <if test="trxAmount != null">
+        TRX_AMOUNT,
+      </if>
+      <if test="exchRate != null">
+        EXCH_RATE,
+      </if>
+      <if test="defCurr != null">
+        DEF_CURR,
+      </if>
+      <if test="defAmount != null">
+        DEF_AMOUNT,
+      </if>
+      <if test="usdAmount != null">
+        USD_AMOUNT,
+      </if>
+      <if test="refNumber != null">
+        REF_NUMBER,
+      </if>
+      <if test="lastModifiedDate != null">
+        LAST_MODIFIED_DATE,
+      </if>
+      <if test="lastModifiedBy != null">
+        LAST_MODIFIED_BY,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trxType != null">
+        #{trxType,jdbcType=CHAR},
+      </if>
+      <if test="trxSource != null">
+        #{trxSource,jdbcType=CHAR},
+      </if>
+      <if test="trxCurr != null">
+        #{trxCurr,jdbcType=CHAR},
+      </if>
+      <if test="trxAmount != null">
+        #{trxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="exchRate != null">
+        #{exchRate,jdbcType=DECIMAL},
+      </if>
+      <if test="defCurr != null">
+        #{defCurr,jdbcType=CHAR},
+      </if>
+      <if test="defAmount != null">
+        #{defAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="usdAmount != null">
+        #{usdAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="refNumber != null">
+        #{refNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifiedDate != null">
+        #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedBy != null">
+        #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

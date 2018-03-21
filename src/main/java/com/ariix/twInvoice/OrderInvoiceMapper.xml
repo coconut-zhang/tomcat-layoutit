@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ariix.twInvoice.OrderInvoiceMapper">
+  <resultMap id="BaseResultMap" type="com.ariix.twInvoice.OrderInvoice">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="API" jdbcType="VARCHAR" property="api" />
+    <result column="CMD" jdbcType="VARCHAR" property="cmd" />
+    <result column="ORDER_ID" jdbcType="DECIMAL" property="orderId" />
+    <result column="ORDER_DATE" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="MEMBER_ID" jdbcType="DECIMAL" property="memberId" />
+    <result column="BUYER_ID" jdbcType="VARCHAR" property="buyerId" />
+    <result column="BUYER_NAME" jdbcType="VARCHAR" property="buyerName" />
+    <result column="BUYER_EMAIL" jdbcType="VARCHAR" property="buyerEmail" />
+    <result column="BUYER_ADDRESS" jdbcType="VARCHAR" property="buyerAddress" />
+    <result column="TAX_TYPE" jdbcType="VARCHAR" property="taxType" />
+    <result column="DONATEMARK" jdbcType="VARCHAR" property="donatemark" />
+    <result column="CARRIER_TYPE" jdbcType="VARCHAR" property="carrierType" />
+    <result column="CARRIER_ID_1" jdbcType="VARCHAR" property="carrierId1" />
+    <result column="CARRIER_ID_2" jdbcType="VARCHAR" property="carrierId2" />
+    <result column="LOVE_CODE" jdbcType="VARCHAR" property="loveCode" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="REQUEST_DATA" jdbcType="VARCHAR" property="requestData" />
+    <result column="POST_ID" jdbcType="VARCHAR" property="postId" />
+    <result column="RESPONSE_MSG" jdbcType="VARCHAR" property="responseMsg" />
+    <result column="INVOICE_NUMBER" jdbcType="VARCHAR" property="invoiceNumber" />
+    <result column="RANDOM_NUMBER" jdbcType="VARCHAR" property="randomNumber" />
+    <result column="CANCEL_REASON" jdbcType="VARCHAR" property="cancelReason" />
+    <result column="CANCELED" jdbcType="TIMESTAMP" property="canceled" />
+    <result column="PRINTED" jdbcType="VARCHAR" property="printed" />
+    <result column="PRINT_TIMES" jdbcType="DECIMAL" property="printTimes" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+    <result column="LAST_UPDATE_BY" jdbcType="VARCHAR" property="lastUpdateBy" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, API, CMD, ORDER_ID, ORDER_DATE, MEMBER_ID, BUYER_ID, BUYER_NAME, BUYER_EMAIL, 
+    BUYER_ADDRESS, TAX_TYPE, DONATEMARK, CARRIER_TYPE, CARRIER_ID_1, CARRIER_ID_2, LOVE_CODE, 
+    REMARK, REQUEST_DATA, POST_ID, RESPONSE_MSG, INVOICE_NUMBER, RANDOM_NUMBER, CANCEL_REASON, 
+    CANCELED, PRINTED, PRINT_TIMES, CREATE_DATE, CREATE_BY, LAST_UPDATE_DATE, LAST_UPDATE_BY
+  </sql>
+  <select id="selectByExample" parameterType="com.ariix.twInvoice.OrderInvoiceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ORDER_INVOICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ORDER_INVOICE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ORDER_INVOICE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ariix.twInvoice.OrderInvoiceExample">
+    delete from ORDER_INVOICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ariix.twInvoice.OrderInvoice">
+    insert into ORDER_INVOICE (ID, API, CMD, 
+      ORDER_ID, ORDER_DATE, MEMBER_ID, 
+      BUYER_ID, BUYER_NAME, BUYER_EMAIL, 
+      BUYER_ADDRESS, TAX_TYPE, DONATEMARK, 
+      CARRIER_TYPE, CARRIER_ID_1, CARRIER_ID_2, 
+      LOVE_CODE, REMARK, REQUEST_DATA, 
+      POST_ID, RESPONSE_MSG, INVOICE_NUMBER, 
+      RANDOM_NUMBER, CANCEL_REASON, CANCELED, 
+      PRINTED, PRINT_TIMES, CREATE_DATE, 
+      CREATE_BY, LAST_UPDATE_DATE, LAST_UPDATE_BY
+      )
+    values (#{id,jdbcType=VARCHAR}, #{api,jdbcType=VARCHAR}, #{cmd,jdbcType=VARCHAR}, 
+      #{orderId,jdbcType=DECIMAL}, #{orderDate,jdbcType=TIMESTAMP}, #{memberId,jdbcType=DECIMAL}, 
+      #{buyerId,jdbcType=VARCHAR}, #{buyerName,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR}, 
+      #{buyerAddress,jdbcType=VARCHAR}, #{taxType,jdbcType=VARCHAR}, #{donatemark,jdbcType=VARCHAR}, 
+      #{carrierType,jdbcType=VARCHAR}, #{carrierId1,jdbcType=VARCHAR}, #{carrierId2,jdbcType=VARCHAR}, 
+      #{loveCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{requestData,jdbcType=VARCHAR}, 
+      #{postId,jdbcType=VARCHAR}, #{responseMsg,jdbcType=VARCHAR}, #{invoiceNumber,jdbcType=VARCHAR}, 
+      #{randomNumber,jdbcType=VARCHAR}, #{cancelReason,jdbcType=VARCHAR}, #{canceled,jdbcType=TIMESTAMP}, 
+      #{printed,jdbcType=VARCHAR}, #{printTimes,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{lastUpdateDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ariix.twInvoice.OrderInvoice">
+    insert into ORDER_INVOICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="api != null">
+        API,
+      </if>
+      <if test="cmd != null">
+        CMD,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="orderDate != null">
+        ORDER_DATE,
+      </if>
+      <if test="memberId != null">
+        MEMBER_ID,
+      </if>
+      <if test="buyerId != null">
+        BUYER_ID,
+      </if>
+      <if test="buyerName != null">
+        BUYER_NAME,
+      </if>
+      <if test="buyerEmail != null">
+        BUYER_EMAIL,
+      </if>
+      <if test="buyerAddress != null">
+        BUYER_ADDRESS,
+      </if>
+      <if test="taxType != null">
+        TAX_TYPE,
+      </if>
+      <if test="donatemark != null">
+        DONATEMARK,
+      </if>
+      <if test="carrierType != null">
+        CARRIER_TYPE,
+      </if>
+      <if test="carrierId1 != null">
+        CARRIER_ID_1,
+      </if>
+      <if test="carrierId2 != null">
+        CARRIER_ID_2,
+      </if>
+      <if test="loveCode != null">
+        LOVE_CODE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="requestData != null">
+        REQUEST_DATA,
+      </if>
+      <if test="postId != null">
+        POST_ID,
+      </if>
+      <if test="responseMsg != null">
+        RESPONSE_MSG,
+      </if>
+      <if test="invoiceNumber != null">
+        INVOICE_NUMBER,
+      </if>
+      <if test="randomNumber != null">
+        RANDOM_NUMBER,
+      </if>
+      <if test="cancelReason != null">
+        CANCEL_REASON,
+      </if>
+      <if test="canceled != null">
+        CANCELED,
+      </if>
+      <if test="printed != null">
+        PRINTED,
+      </if>
+      <if test="printTimes != null">
+        PRINT_TIMES,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="lastUpdateDate != null">
+        LAST_UPDATE_DATE,
+      </if>
+      <if test="lastUpdateBy != null">
+        LAST_UPDATE_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null">
+        #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="cmd != null">
+        #{cmd,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=DECIMAL},
+      </if>
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerName != null">
+        #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerEmail != null">
+        #{buyerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerAddress != null">
+        #{buyerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="taxType != null">
+        #{taxType,jdbcType=VARCHAR},
+      </if>
+      <if test="donatemark != null">
+        #{donatemark,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierType != null">
+        #{carrierType,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierId1 != null">
+        #{carrierId1,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierId2 != null">
+        #{carrierId2,jdbcType=VARCHAR},
+      </if>
+      <if test="loveCode != null">
+        #{loveCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="requestData != null">
+        #{requestData,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=VARCHAR},
+      </if>
+      <if test="responseMsg != null">
+        #{responseMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNumber != null">
+        #{invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="randomNumber != null">
+        #{randomNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelReason != null">
+        #{cancelReason,jdbcType=VARCHAR},
+      </if>
+      <if test="canceled != null">
+        #{canceled,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printed != null">
+        #{printed,jdbcType=VARCHAR},
+      </if>
+      <if test="printTimes != null">
+        #{printTimes,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null">
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ariix.twInvoice.OrderInvoiceExample" resultType="java.lang.Integer">
+    select count(*) from ORDER_INVOICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ORDER_INVOICE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.api != null">
+        API = #{record.api,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmd != null">
+        CMD = #{record.cmd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderDate != null">
+        ORDER_DATE = #{record.orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memberId != null">
+        MEMBER_ID = #{record.memberId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buyerId != null">
+        BUYER_ID = #{record.buyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyerName != null">
+        BUYER_NAME = #{record.buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyerEmail != null">
+        BUYER_EMAIL = #{record.buyerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyerAddress != null">
+        BUYER_ADDRESS = #{record.buyerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxType != null">
+        TAX_TYPE = #{record.taxType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.donatemark != null">
+        DONATEMARK = #{record.donatemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carrierType != null">
+        CARRIER_TYPE = #{record.carrierType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carrierId1 != null">
+        CARRIER_ID_1 = #{record.carrierId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carrierId2 != null">
+        CARRIER_ID_2 = #{record.carrierId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loveCode != null">
+        LOVE_CODE = #{record.loveCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestData != null">
+        REQUEST_DATA = #{record.requestData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postId != null">
+        POST_ID = #{record.postId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.responseMsg != null">
+        RESPONSE_MSG = #{record.responseMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceNumber != null">
+        INVOICE_NUMBER = #{record.invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.randomNumber != null">
+        RANDOM_NUMBER = #{record.randomNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cancelReason != null">
+        CANCEL_REASON = #{record.cancelReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.canceled != null">
+        CANCELED = #{record.canceled,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.printed != null">
+        PRINTED = #{record.printed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printTimes != null">
+        PRINT_TIMES = #{record.printTimes,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createDate != null">
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        CREATE_BY = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUpdateDate != null">
+        LAST_UPDATE_DATE = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateBy != null">
+        LAST_UPDATE_BY = #{record.lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ORDER_INVOICE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      API = #{record.api,jdbcType=VARCHAR},
+      CMD = #{record.cmd,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=DECIMAL},
+      ORDER_DATE = #{record.orderDate,jdbcType=TIMESTAMP},
+      MEMBER_ID = #{record.memberId,jdbcType=DECIMAL},
+      BUYER_ID = #{record.buyerId,jdbcType=VARCHAR},
+      BUYER_NAME = #{record.buyerName,jdbcType=VARCHAR},
+      BUYER_EMAIL = #{record.buyerEmail,jdbcType=VARCHAR},
+      BUYER_ADDRESS = #{record.buyerAddress,jdbcType=VARCHAR},
+      TAX_TYPE = #{record.taxType,jdbcType=VARCHAR},
+      DONATEMARK = #{record.donatemark,jdbcType=VARCHAR},
+      CARRIER_TYPE = #{record.carrierType,jdbcType=VARCHAR},
+      CARRIER_ID_1 = #{record.carrierId1,jdbcType=VARCHAR},
+      CARRIER_ID_2 = #{record.carrierId2,jdbcType=VARCHAR},
+      LOVE_CODE = #{record.loveCode,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      REQUEST_DATA = #{record.requestData,jdbcType=VARCHAR},
+      POST_ID = #{record.postId,jdbcType=VARCHAR},
+      RESPONSE_MSG = #{record.responseMsg,jdbcType=VARCHAR},
+      INVOICE_NUMBER = #{record.invoiceNumber,jdbcType=VARCHAR},
+      RANDOM_NUMBER = #{record.randomNumber,jdbcType=VARCHAR},
+      CANCEL_REASON = #{record.cancelReason,jdbcType=VARCHAR},
+      CANCELED = #{record.canceled,jdbcType=TIMESTAMP},
+      PRINTED = #{record.printed,jdbcType=VARCHAR},
+      PRINT_TIMES = #{record.printTimes,jdbcType=DECIMAL},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      CREATE_BY = #{record.createBy,jdbcType=VARCHAR},
+      LAST_UPDATE_DATE = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      LAST_UPDATE_BY = #{record.lastUpdateBy,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ariix.twInvoice.OrderInvoice">
+    update ORDER_INVOICE
+    <set>
+      <if test="api != null">
+        API = #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="cmd != null">
+        CMD = #{cmd,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderDate != null">
+        ORDER_DATE = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null">
+        MEMBER_ID = #{memberId,jdbcType=DECIMAL},
+      </if>
+      <if test="buyerId != null">
+        BUYER_ID = #{buyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerName != null">
+        BUYER_NAME = #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerEmail != null">
+        BUYER_EMAIL = #{buyerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerAddress != null">
+        BUYER_ADDRESS = #{buyerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="taxType != null">
+        TAX_TYPE = #{taxType,jdbcType=VARCHAR},
+      </if>
+      <if test="donatemark != null">
+        DONATEMARK = #{donatemark,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierType != null">
+        CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierId1 != null">
+        CARRIER_ID_1 = #{carrierId1,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierId2 != null">
+        CARRIER_ID_2 = #{carrierId2,jdbcType=VARCHAR},
+      </if>
+      <if test="loveCode != null">
+        LOVE_CODE = #{loveCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="requestData != null">
+        REQUEST_DATA = #{requestData,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null">
+        POST_ID = #{postId,jdbcType=VARCHAR},
+      </if>
+      <if test="responseMsg != null">
+        RESPONSE_MSG = #{responseMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNumber != null">
+        INVOICE_NUMBER = #{invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="randomNumber != null">
+        RANDOM_NUMBER = #{randomNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelReason != null">
+        CANCEL_REASON = #{cancelReason,jdbcType=VARCHAR},
+      </if>
+      <if test="canceled != null">
+        CANCELED = #{canceled,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printed != null">
+        PRINTED = #{printed,jdbcType=VARCHAR},
+      </if>
+      <if test="printTimes != null">
+        PRINT_TIMES = #{printTimes,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null">
+        LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null">
+        LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ariix.twInvoice.OrderInvoice">
+    update ORDER_INVOICE
+    set API = #{api,jdbcType=VARCHAR},
+      CMD = #{cmd,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=DECIMAL},
+      ORDER_DATE = #{orderDate,jdbcType=TIMESTAMP},
+      MEMBER_ID = #{memberId,jdbcType=DECIMAL},
+      BUYER_ID = #{buyerId,jdbcType=VARCHAR},
+      BUYER_NAME = #{buyerName,jdbcType=VARCHAR},
+      BUYER_EMAIL = #{buyerEmail,jdbcType=VARCHAR},
+      BUYER_ADDRESS = #{buyerAddress,jdbcType=VARCHAR},
+      TAX_TYPE = #{taxType,jdbcType=VARCHAR},
+      DONATEMARK = #{donatemark,jdbcType=VARCHAR},
+      CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR},
+      CARRIER_ID_1 = #{carrierId1,jdbcType=VARCHAR},
+      CARRIER_ID_2 = #{carrierId2,jdbcType=VARCHAR},
+      LOVE_CODE = #{loveCode,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      REQUEST_DATA = #{requestData,jdbcType=VARCHAR},
+      POST_ID = #{postId,jdbcType=VARCHAR},
+      RESPONSE_MSG = #{responseMsg,jdbcType=VARCHAR},
+      INVOICE_NUMBER = #{invoiceNumber,jdbcType=VARCHAR},
+      RANDOM_NUMBER = #{randomNumber,jdbcType=VARCHAR},
+      CANCEL_REASON = #{cancelReason,jdbcType=VARCHAR},
+      CANCELED = #{canceled,jdbcType=TIMESTAMP},
+      PRINTED = #{printed,jdbcType=VARCHAR},
+      PRINT_TIMES = #{printTimes,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

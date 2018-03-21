@@ -1,0 +1,46 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>home</display-name>
+  
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 
+  <servlet>
+    <servlet-name>servletGif</servlet-name>
+    <servlet-class>com.ariix.kount.LogoHtm</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+	<servlet-name>servletGif</servlet-name>
+	<url-pattern>*.htm</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>servletHtm</servlet-name>
+    <servlet-class>com.ariix.kount.LogoGif</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+	<servlet-name>servletHtm</servlet-name>
+	<url-pattern>*.gif</url-pattern>
+  </servlet-mapping>
+  
+   -->
+   
+  <servlet>
+    <servlet-name>KountServlet</servlet-name>
+    <servlet-class>com.ariix.kount.KountRisCallServlet</servlet-class>
+  </servlet>
+   
+  <servlet-mapping>
+        <servlet-name>KountServlet</servlet-name>
+        <url-pattern>/servlet/KountRisCallServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
